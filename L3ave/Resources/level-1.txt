@@ -1,0 +1,30 @@
+32 24 0
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+-------------------------------W
+-X----WW----WW----WW----WW-----W
+------WW----WW----WW----WW-----W
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W
+W------------------------------W  
+0,0 1,24 - level 0
+6,12 8,13 - playertext MARK ZARUBA\n\nSCRIPTWRITER\n\nMADE OF FUR AND MAGIC\n\n
+12,12 14,13 - playertext VLADIMIR CHEREPANOV\n\nC# PROGRAMMER\n\nART WILL SURVIVE.\n\nARTISITS WON'T.\n\n\n
+18,12 20,13 - playertext ILYA YUHATSKIY\n\nC# PROGRAMMER\n\nCREEWICK: VIDEOS AND STUFF\n\n
+24,12 26,13 - playertext PAVEL ZHERZHERUNOV\n\nCOMPOSER\n\nDOWN TO EARTH\n\n
