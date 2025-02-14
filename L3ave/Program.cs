@@ -1,11 +1,17 @@
-﻿using L3ave.Drawing;
+﻿using System;
 
-public static class Program
+using L3ave.Drawing;
+
+namespace L3ave
 {
-	[STAThread]
-	private static void Main()
+	public static class Program
 	{
-		using Window window = new Window();
-		window.Run();
+		[STAThread]
+		private static void Main()
+		{
+			using (var window = new Window()) {
+				window.Run();
+			}
+		}
 	}
 }

@@ -1,3 +1,5 @@
+using System;
+
 namespace L3ave.Utils
 {
     public static class EnumParser

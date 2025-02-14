@@ -16,7 +16,7 @@ namespace L3ave.Utils
             var groups = EventModel.Match(line).Groups;
 
             var rectangle = new Rect(ExtractPoint(groups[1].Value), ExtractPoint(groups[2].Value));
-            var triggers = ExtractTriggers(groups[3].Value.Split([';']));
+            var triggers = ExtractTriggers(groups[3].Value.Split(new char[1] {';'}));
             var value = groups[5].Value;
 
             return groups[4].Value switch
@@ -48,7 +48,7 @@ namespace L3ave.Utils
 
         private static Point ExtractPoint(string data, char splitter = ',')
         {
-            var array = data.Split([splitter]);
+            var array = data.Split(new char[1] {splitter});
 
             return new Point(int.Parse(array[0]), int.Parse(array[1]));
         }
@@ -88,7 +88,7 @@ namespace L3ave.Utils
 
         private static Event ParseLevel(Rect rectangle, List<TriggerPair> triggers, string data)
         {
-            var array = data.Split(['=']);
+            var array = data.Split(new char[1] {'='});
             var point = (array.Length > 1) ? ExtractPoint(array[1]) : null;
 
             var levelNumber = int.Parse(array[0]);
@@ -105,12 +105,12 @@ namespace L3ave.Utils
         private static Event ParseMap(Rect rectangle, List<TriggerPair> triggers, string data)
         {
             var cellsToChange = new List<Tuple<int, int, CellType>>();
-            var array = data.Split([';']);
+            var array = data.Split(new char[1] {';'});
 
             foreach (var text in array)
             {
-                var array2 = text.Split(['=']);
-                var array3 = array2[0].Split([',']);
+                var array2 = text.Split(new char[1] {'='});
+                var array3 = array2[0].Split(new char[1] {','});
 
                 var item = EnumParser.Parse<CellType>(array2[1]);
 
@@ -131,7 +131,7 @@ namespace L3ave.Utils
 
         private static Event ParseTrigger(Rect rectangle, List<TriggerPair> triggers, string data)
         {
-            var array = data.Split(['=']);
+            var array = data.Split(new char[1] {'='});
 
             var name = array[0];
             var value = bool.Parse(array[1]);

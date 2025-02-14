@@ -61,13 +61,12 @@ namespace L3ave.Drawing
 
             cellSize = 20;
 
-            overlay =
-            [
-                content.Load<Texture2D>("overlay-right-top"),
-                content.Load<Texture2D>("overlay-left-top"),
-                content.Load<Texture2D>("overlay-right-bottom"),
-                content.Load<Texture2D>("overlay-left-bottom"),
-            ];
+            overlay = new List<Texture2D>();
+
+            overlay.Add(content.Load<Texture2D>("overlay-right-top"));
+            overlay.Add(content.Load<Texture2D>("overlay-left-top"));
+            overlay.Add(content.Load<Texture2D>("overlay-right-bottom"));
+            overlay.Add(content.Load<Texture2D>("overlay-left-bottom"));
 
             texture = content.Load<Texture2D>("white");
             font = content.Load<SpriteFont>("impact");
@@ -219,7 +218,7 @@ namespace L3ave.Drawing
         private void DrawPhrase(string text, Vector2 center, float lineHeight, Color color)
         {
             var num = font.LineSpacing / 4;
-            var array = text.Split(['\n']);
+            var array = text.Split(new char[1] {'\n'});
 
             for (var i = 0; i < array.Length; i++)
             {

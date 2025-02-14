@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -42,8 +43,8 @@ namespace L3ave.Levels
         {
             content = content.Replace("\r\n", "\n");
 
-            var array = content.Split(['\n']);
-            var array2 = array[0].Split([' ']);
+            var array = content.Split(new char[1] {'\n'});
+            var array2 = array[0].Split(new char[1] {' '});
 
             Point position = null;
 
