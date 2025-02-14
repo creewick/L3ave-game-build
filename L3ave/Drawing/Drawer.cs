@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 using L3ave.Models;
+using System.Runtime.CompilerServices;
 
 namespace L3ave.Drawing
 {
@@ -160,7 +161,7 @@ namespace L3ave.Drawing
 
         private void DrawText()
         {
-            var num = drawingArea.Height / 8;
+            var num1 = drawingArea.Height / 8;
             var num2 = drawingArea.Height / 16;
 
             if ((game.Message != lastMessage && game.Message != "") || (game.Text != lastText && game.Text != ""))
@@ -171,8 +172,17 @@ namespace L3ave.Drawing
                 lastText = game.Text;
             }
 
-            DrawPhrase(game.Message, drawingArea.Center.ToVector2(), num, Color.Gray * game.MessageOpacity);
-            DrawPhrase(game.Text, new Vector2(drawingArea.X + (int)((game.Level.Position.X + 0.5) * (double)cellSize), drawingArea.Y + (int)(game.Level.Position.Y * (double)cellSize - (double)num2)), num2, Color.LimeGreen);
+            var vector1 = new Vector2(
+                drawingArea.Center.X,
+                drawingArea.Center.Y
+            );
+            var vector2 = new Vector2(
+                drawingArea.X + (int)((game.Level.Position.X + 0.5) * (double)cellSize),
+                drawingArea.Y + (int)(game.Level.Position.Y * (double)cellSize - (double)num2)
+            );
+
+            DrawPhrase(game.Message, vector1, num1, Color.Gray * game.MessageOpacity);
+            DrawPhrase(game.Text, vector2, num2, Color.LimeGreen);
         }
 
         private void DrawNoise(int noiseSize, double freq)
