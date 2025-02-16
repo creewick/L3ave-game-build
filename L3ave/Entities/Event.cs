@@ -1,8 +1,8 @@
 using System;
 
-using L3ave.GameLogic;
+using L3ave.Model;
 
-namespace L3ave.Models
+namespace L3ave.Entities
 {
     public class Event
     {

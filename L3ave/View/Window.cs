@@ -2,7 +2,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace L3ave.Drawing
+using L3ave.Model;
+using L3ave.Utils;
+
+namespace L3ave.View
 {
     public class Window : Microsoft.Xna.Framework.Game
     {
@@ -14,19 +17,19 @@ namespace L3ave.Drawing
 
         private Drawer drawer;
 
-        private GameLogic.Game game;
+        private Model.Game game;
 
         public Window()
         {
             graphics = new GraphicsDeviceManager(this);
 
-            base.Window.AllowUserResizing = true;
             base.Content.RootDirectory = "Content";
+            base.Window.AllowUserResizing = true;
         }
 
         protected override void Initialize()
         {
-            game = new GameLogic.Game();
+            game = new Model.Game();
             batch = new SpriteBatch(base.GraphicsDevice);
             drawer = new Drawer(base.Content, batch, game);
 

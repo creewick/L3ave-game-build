@@ -1,6 +1,6 @@
 using System;
 
-namespace L3ave.Drawing
+namespace L3ave.View
 {
     public static class Noise
     {

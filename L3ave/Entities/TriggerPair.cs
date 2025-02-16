@@ -1,4 +1,4 @@
-namespace L3ave.GameLogic
+namespace L3ave.Entities
 {
     public class TriggerPair
     {

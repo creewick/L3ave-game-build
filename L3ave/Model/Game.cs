@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-using L3ave.Models;
-using L3ave.Levels;
-using L3ave.Drawing;
+using L3ave.View;
+using L3ave.Utils;
+using L3ave.Entities;
 
-namespace L3ave.GameLogic
+namespace L3ave.Model
 {
     public class Game
     {
@@ -74,7 +74,7 @@ namespace L3ave.GameLogic
                 return;
             }
 
-            Level = LevelLoader.LoadFromFile($"L3ave.Resources.level{number}.txt");
+            Level = LevelLoader.LoadFromFile($"L3ave.Levels.level{number}.txt");
 
             lightning = new Lightning(Level.Field);
 

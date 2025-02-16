@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using L3ave.Models;
-using L3ave.GameLogic;
+using L3ave.Model;
+using L3ave.Entities;
 
 namespace L3ave.Utils
 {

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace L3ave.GameLogic
+using L3ave.Entities;
+
+namespace L3ave.Model
 {
     public class Triggers
     {

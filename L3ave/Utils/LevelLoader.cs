@@ -3,10 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 using System.Reflection;
 
-using L3ave.Utils;
-using L3ave.Models;
+using L3ave.Entities;
 
-namespace L3ave.Levels
+namespace L3ave.Utils
 {
     public static class LevelLoader
     {

@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
 
-namespace L3ave.Drawing
+namespace L3ave.Utils
 {
     internal class MusicPlayer
     {

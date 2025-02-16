@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using L3ave.Models;
-
-namespace L3ave.Levels
+namespace L3ave.Entities
 {
     public class Level
     {

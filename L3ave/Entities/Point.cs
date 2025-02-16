@@ -1,4 +1,4 @@
-namespace L3ave.Models
+namespace L3ave.Entities
 {
     public class Point
     {

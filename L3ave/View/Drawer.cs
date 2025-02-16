@@ -5,10 +5,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-using L3ave.Models;
 using System.Runtime.CompilerServices;
 
-namespace L3ave.Drawing
+using L3ave.Model;
+using L3ave.Utils;
+using L3ave.Entities;
+
+namespace L3ave.View
 {
     public class Drawer
     {
@@ -34,7 +37,7 @@ namespace L3ave.Drawing
 
         private List<Texture2D> overlay;
 
-        private LinkedList<Models.Point> tail;
+        private LinkedList<Entities.Point> tail;
 
         private Rectangle drawingArea;
 
@@ -46,7 +49,7 @@ namespace L3ave.Drawing
 
         private SpriteFont font;
 
-        private GameLogic.Game game;
+        private Model.Game game;
 
         private int cellSize;
 
@@ -54,7 +57,7 @@ namespace L3ave.Drawing
 
         private string lastText = "";
 
-        public Drawer(ContentManager content, SpriteBatch batch, GameLogic.Game game)
+        public Drawer(ContentManager content, SpriteBatch batch, Model.Game game)
         {
             this.game = game;
             this.batch = batch;
@@ -70,7 +73,7 @@ namespace L3ave.Drawing
 
             texture = content.Load<Texture2D>("white");
             font = content.Load<SpriteFont>("impact");
-            tail = new LinkedList<Models.Point>();
+            tail = new LinkedList<Entities.Point>();
         }
 
         public void Resize(Rectangle clientBounds)
@@ -141,7 +144,7 @@ namespace L3ave.Drawing
             tail.AddFirst(game.Level.Position.Clone());
             tail.RemoveLast();
 
-            var point = new Models.Point();
+            var point = new Entities.Point();
 
             foreach (var item in tail)
             {

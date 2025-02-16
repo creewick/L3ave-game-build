@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 
-using L3ave.Models;
-using L3ave.Drawing;
+using L3ave.View;
+using L3ave.Utils;
+using L3ave.Entities;
 
-namespace L3ave.GameLogic
+namespace L3ave.Model
 {
     public class Lightning
     {
