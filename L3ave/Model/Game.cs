@@ -74,7 +74,7 @@ namespace L3ave.Model
                 return;
             }
 
-            Level = LevelLoader.LoadFromFile($"L3ave.Levels.level{number}.txt");
+            Level = LevelLoader.LoadFromFile($"L3ave.Resources.Levels.level{number}.txt");
 
             lightning = new Lightning(Level.Field);
 

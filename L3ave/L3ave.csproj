@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Levels/*" />
+    <EmbeddedResource Include="Resources/Levels/*" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Content/*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Resources/Content/*" CopyToOutputDirectory="Always" TargetPath="Content/%(Filename)%(Extension)" />
   </ItemGroup>
 
   <ItemGroup>
