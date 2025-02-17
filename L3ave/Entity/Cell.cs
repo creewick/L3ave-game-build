@@ -1,4 +1,4 @@
-namespace L3ave.Entities
+namespace L3ave.Entity
 {
     public enum CellType
     {

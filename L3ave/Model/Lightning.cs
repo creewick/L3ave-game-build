@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using L3ave.View;
 using L3ave.Utils;
-using L3ave.Entities;
+using L3ave.Entity;
 
 namespace L3ave.Model
 {

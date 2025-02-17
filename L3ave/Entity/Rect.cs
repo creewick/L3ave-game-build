@@ -1,6 +1,6 @@
 using System;
 
-namespace L3ave.Entities
+namespace L3ave.Entity
 {
     public class Rect
     {

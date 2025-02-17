@@ -2,7 +2,7 @@ using System;
 
 using L3ave.Model;
 
-namespace L3ave.Entities
+namespace L3ave.Entity
 {
     public class Event
     {

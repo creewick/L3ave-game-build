@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Reflection;
 
-using L3ave.Entities;
+using L3ave.Entity;
 
 namespace L3ave.Utils
 {

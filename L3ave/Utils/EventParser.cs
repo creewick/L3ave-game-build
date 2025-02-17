@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using L3ave.Model;
-using L3ave.Entities;
+using L3ave.Entity;
 
 namespace L3ave.Utils
 {

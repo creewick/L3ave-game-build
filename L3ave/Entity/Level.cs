@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace L3ave.Entities
+namespace L3ave.Entity
 {
     public class Level
     {

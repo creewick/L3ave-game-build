@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using L3ave.Entities;
+using L3ave.Entity;
 
 namespace L3ave.Model
 {

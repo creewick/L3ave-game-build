@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 using L3ave.Model;
 using L3ave.Utils;
-using L3ave.Entities;
+using L3ave.Entity;
 
 namespace L3ave.View
 {
@@ -37,7 +37,7 @@ namespace L3ave.View
 
         private List<Texture2D> overlay;
 
-        private LinkedList<Entities.Point> tail;
+        private LinkedList<Entity.Point> tail;
 
         private Rectangle drawingArea;
 
@@ -73,7 +73,7 @@ namespace L3ave.View
 
             texture = content.Load<Texture2D>("white");
             font = content.Load<SpriteFont>("impact");
-            tail = new LinkedList<Entities.Point>();
+            tail = new LinkedList<Entity.Point>();
         }
 
         public void Resize(Rectangle clientBounds)
@@ -144,7 +144,7 @@ namespace L3ave.View
             tail.AddFirst(game.Level.Position.Clone());
             tail.RemoveLast();
 
-            var point = new Entities.Point();
+            var point = new Entity.Point();
 
             foreach (var item in tail)
             {
