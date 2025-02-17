@@ -1,0 +1,94 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0
+
+RUN apt update \
+    && apt install -y make cmake zip unzip wget python3 xz-utils
+
+SHELL ["/bin/bash", "-c"]
+
+# 1. Download emsdk 4.0.3 (latest release)
+RUN wget https://github.com/emscripten-core/emsdk/archive/refs/tags/4.0.3.zip \
+    && unzip 4.0.3.zip \
+    && rm 4.0.3.zip
+
+# 2. Activate version 3.1.56 (version used by .NET)
+RUN cd /emsdk-4.0.3 \
+    && ./emsdk install 3.1.56 \
+    && ./emsdk activate 3.1.56
+
+# 3. Download SDL 2.32.0 (latest SDL2 release)
+RUN wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.32.0.zip \
+    && unzip release-2.32.0.zip \
+    && rm release-2.32.0.zip
+
+# 4. Build SDL2 for emscripten
+RUN cd /SDL-release-2.32.0 \
+    && source "/emsdk-4.0.3/emsdk_env.sh" \
+    && mkdir build \
+    && cd build \
+    && emcmake cmake .. \
+    && emmake make
+
+# 5. Download FNA3D 25.02 (latest release)
+RUN git clone https://github.com/FNA-XNA/FNA3D /FNA3D-25.02 \
+    && cd /FNA3D-25.02 \
+    && git reset --hard 25.02 \
+    && git submodule update --init --recursive
+
+# 7. Build FNA3D with SDL2 for emscripten
+RUN cd /FNA3D-25.02 \
+    && source "/emsdk-4.0.3/emsdk_env.sh" \
+    && mkdir build \
+    && cd build \
+    && emcmake cmake .. -DBUILD_SDL3=0 -DSDL2_INCLUDE_DIRS=/SDL-release-2.32.0/include -DSDL2_LIBRARIES=/SDL-release-2.32.0/build/libSDL2.a \
+    && emmake make
+
+# 8. Download FAudio 25.02 (latest release)
+RUN git clone https://github.com/FNA-XNA/FAudio /FAudio-25.02 \
+    && cd /FAudio-25.02 \
+    && git reset --hard 25.02 \
+    && git submodule update --init --recursive
+
+# 9. Build FAudio with SDL2 for emscripten
+RUN cd /FAudio-25.02 \
+    && source "/emsdk-4.0.3/emsdk_env.sh" \
+    && mkdir build \
+    && cd build \
+    && emcmake cmake .. -DBUILD_SDL3=0 -DSDL2_INCLUDE_DIRS=/SDL-release-2.32.0/include -DSDL2_LIBRARIES=/SDL-release-2.32.0/build/libSDL2.a \
+    && emmake make
+
+# 10. Download FNA 25.02 (latest release)
+RUN git clone https://github.com/FNA-XNA/FNA.git /FNA-25.02 \
+    && cd /FNA-25.02 \
+    && git reset --hard 25.02 \
+    && git submodule update --init --recursive
+
+# 11. Install wasm-tools (for caching)
+RUN dotnet workload install wasm-tools
+
+# 12. Copy source code
+COPY L3ave /L3ave
+COPY L3ave-wasm /L3ave
+
+# 13. Apply patch to FNA
+RUN cd /FNA-25.02 \
+    && git apply /L3ave/FNA.patch
+
+# 14. Copy native libraries
+RUN cd /L3ave \
+    && mkdir native-libs \
+    && cp /SDL-release-2.32.0/build/libSDL2.a native-libs/SDL2.a \
+    && cp /FNA3D-25.02/build/libFNA3D.a native-libs/FNA3D.a \
+    && cp /FNA3D-25.02/build/libmojoshader.a native-libs/mojoshader.a \
+    && cp /FAudio-25.02/build/libFAudio.a native-libs/FAudio.a
+
+# 15. Build project
+RUN cd /L3ave \
+    && dotnet restore \
+    && dotnet workload restore \
+    && dotnet publish L3ave.csproj --configuration Release
+
+# 16. Add wwwroot to archive
+RUN mkdir /L3ave/assets \
+    && cd /L3ave/bin/Release/net9.0/publish/ \
+    && cp -r wwwroot /L3ave/assets/ \
+    && zip -r /L3ave/assets/L3ave-wasm.zip wwwroot

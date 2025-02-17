@@ -1,0 +1,458 @@
+Submodule lib/SDL2-CS contains modified content
+diff --git a/lib/SDL2-CS/src/SDL2.cs b/lib/SDL2-CS/src/SDL2.cs
+index ceecdf7..6bc1896 100644
+--- a/lib/SDL2-CS/src/SDL2.cs
++++ b/lib/SDL2-CS/src/SDL2.cs
+@@ -434,31 +434,31 @@ namespace SDL2
+ 		/* This is used as a function pointer to a C main() function */
+ 		public delegate int SDL_main_func(int argc, IntPtr argv);
+ 
+-		/* Use this function with UWP to call your C# Main() function! */
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern int SDL_WinRTRunApp(
+-			SDL_main_func mainFunction,
+-			IntPtr reserved
+-		);
+-
+-		/* Use this function with GDK/GDKX to call your C# Main() function!
+-		 * Only available in SDL 2.24.0 or higher.
+-		 */
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern int SDL_GDKRunApp(
+-			SDL_main_func mainFunction,
+-			IntPtr reserved
+-		);
+-
+-		/* Use this function with iOS to call your C# Main() function!
+-		 * Only available in SDL 2.0.10 or higher.
+-		 */
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern int SDL_UIKitRunApp(
+-			int argc,
+-			IntPtr argv,
+-			SDL_main_func mainFunction
+-		);
++		// /* Use this function with UWP to call your C# Main() function! */
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern int SDL_WinRTRunApp(
++		// 	SDL_main_func mainFunction,
++		// 	IntPtr reserved
++		// );
++
++		// /* Use this function with GDK/GDKX to call your C# Main() function!
++		//  * Only available in SDL 2.24.0 or higher.
++		//  */
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern int SDL_GDKRunApp(
++		// 	SDL_main_func mainFunction,
++		// 	IntPtr reserved
++		// );
++
++		// /* Use this function with iOS to call your C# Main() function!
++		//  * Only available in SDL 2.0.10 or higher.
++		//  */
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern int SDL_UIKitRunApp(
++		// 	int argc,
++		// 	IntPtr argv,
++		// 	SDL_main_func mainFunction
++		// );
+ 
+ 		#endregion
+ 
+@@ -8479,167 +8479,167 @@ namespace SDL2
+ 
+ 		#endregion
+ 
+-		#region SDL_system.h
+-
+-		/* Windows */
++		// #region SDL_system.h
+ 
+-		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+-		public delegate IntPtr SDL_WindowsMessageHook(
+-			IntPtr userdata,
+-			IntPtr hWnd,
+-			uint message,
+-			ulong wParam,
+-			long lParam
+-		);
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern void SDL_SetWindowsMessageHook(
+-			SDL_WindowsMessageHook callback,
+-			IntPtr userdata
+-		);
+-
+-		/* renderer refers to an SDL_Renderer*
+-		 * IntPtr refers to an IDirect3DDevice9*
+-		 * Only available in 2.0.1 or higher.
+-		 */
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern IntPtr SDL_RenderGetD3D9Device(IntPtr renderer);
+-
+-		/* renderer refers to an SDL_Renderer*
+-		 * IntPtr refers to an ID3D11Device*
+-		 * Only available in 2.0.16 or higher.
+-		 */
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern IntPtr SDL_RenderGetD3D11Device(IntPtr renderer);
+-
+-		/* iOS */
+-
+-		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+-		public delegate void SDL_iPhoneAnimationCallback(IntPtr p);
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern int SDL_iPhoneSetAnimationCallback(
+-			IntPtr window, /* SDL_Window* */
+-			int interval,
+-			SDL_iPhoneAnimationCallback callback,
+-			IntPtr callbackParam
+-		);
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern void SDL_iPhoneSetEventPump(SDL_bool enabled);
+-
+-		/* Android */
+-
+-		public const int SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;
+-		public const int SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02;
+-
+-		/* IntPtr refers to a JNIEnv* */
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern IntPtr SDL_AndroidGetJNIEnv();
+-
+-		/* IntPtr refers to a jobject */
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern IntPtr SDL_AndroidGetActivity();
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern SDL_bool SDL_IsAndroidTV();
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern SDL_bool SDL_IsChromebook();
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern SDL_bool SDL_IsDeXMode();
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern void SDL_AndroidBackButton();
+-
+-		[DllImport(nativeLibName, EntryPoint = "SDL_AndroidGetInternalStoragePath", CallingConvention = CallingConvention.Cdecl)]
+-		private static extern IntPtr INTERNAL_SDL_AndroidGetInternalStoragePath();
+-
+-		public static string SDL_AndroidGetInternalStoragePath()
+-		{
+-			return UTF8_ToManaged(
+-				INTERNAL_SDL_AndroidGetInternalStoragePath()
+-			);
+-		}
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern int SDL_AndroidGetExternalStorageState();
+-
+-		[DllImport(nativeLibName, EntryPoint = "SDL_AndroidGetExternalStoragePath", CallingConvention = CallingConvention.Cdecl)]
+-		private static extern IntPtr INTERNAL_SDL_AndroidGetExternalStoragePath();
+-
+-		public static string SDL_AndroidGetExternalStoragePath()
+-		{
+-			return UTF8_ToManaged(
+-				INTERNAL_SDL_AndroidGetExternalStoragePath()
+-			);
+-		}
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern int SDL_GetAndroidSDKVersion();
+-
+-		/* Only available in 2.0.14 or higher. */
+-		[DllImport(nativeLibName, EntryPoint = "SDL_AndroidRequestPermission", CallingConvention = CallingConvention.Cdecl)]
+-		private static unsafe extern SDL_bool INTERNAL_SDL_AndroidRequestPermission(
+-			byte* permission
+-		);
+-		public static unsafe SDL_bool SDL_AndroidRequestPermission(
+-			string permission
+-		) {
+-			byte* permissionPtr = Utf8EncodeHeap(permission);
+-			SDL_bool result = INTERNAL_SDL_AndroidRequestPermission(
+-				permissionPtr
+-			);
+-			Marshal.FreeHGlobal((IntPtr) permissionPtr);
+-			return result;
+-		}
+-
+-		/* Only available in 2.0.16 or higher. */
+-		[DllImport(nativeLibName, EntryPoint = "SDL_AndroidShowToast", CallingConvention = CallingConvention.Cdecl)]
+-		private static unsafe extern int INTERNAL_SDL_AndroidShowToast(
+-			byte* message,
+-			int duration,
+-			int gravity,
+-			int xOffset,
+-			int yOffset
+-		);
+-		public static unsafe int SDL_AndroidShowToast(
+-			string message,
+-			int duration,
+-			int gravity,
+-			int xOffset,
+-			int yOffset
+-		) {
+-			byte* messagePtr = Utf8EncodeHeap(message);
+-			int result = INTERNAL_SDL_AndroidShowToast(
+-				messagePtr,
+-				duration,
+-				gravity,
+-				xOffset,
+-				yOffset
+-			);
+-			Marshal.FreeHGlobal((IntPtr) messagePtr);
+-			return result;
+-		}
+-
+-		/* WinRT */
+-
+-		public enum SDL_WinRT_DeviceFamily
+-		{
+-			SDL_WINRT_DEVICEFAMILY_UNKNOWN,
+-			SDL_WINRT_DEVICEFAMILY_DESKTOP,
+-			SDL_WINRT_DEVICEFAMILY_MOBILE,
+-			SDL_WINRT_DEVICEFAMILY_XBOX
+-		}
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern SDL_WinRT_DeviceFamily SDL_WinRTGetDeviceFamily();
+-
+-		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+-		public static extern SDL_bool SDL_IsTablet();
+-
+-		#endregion
++		// /* Windows */
++
++		// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
++		// public delegate IntPtr SDL_WindowsMessageHook(
++		// 	IntPtr userdata,
++		// 	IntPtr hWnd,
++		// 	uint message,
++		// 	ulong wParam,
++		// 	long lParam
++		// );
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern void SDL_SetWindowsMessageHook(
++		// 	SDL_WindowsMessageHook callback,
++		// 	IntPtr userdata
++		// );
++
++		// /* renderer refers to an SDL_Renderer*
++		//  * IntPtr refers to an IDirect3DDevice9*
++		//  * Only available in 2.0.1 or higher.
++		//  */
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern IntPtr SDL_RenderGetD3D9Device(IntPtr renderer);
++
++		// /* renderer refers to an SDL_Renderer*
++		//  * IntPtr refers to an ID3D11Device*
++		//  * Only available in 2.0.16 or higher.
++		//  */
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern IntPtr SDL_RenderGetD3D11Device(IntPtr renderer);
++
++		// /* iOS */
++
++		// [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
++		// public delegate void SDL_iPhoneAnimationCallback(IntPtr p);
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern int SDL_iPhoneSetAnimationCallback(
++		// 	IntPtr window, /* SDL_Window* */
++		// 	int interval,
++		// 	SDL_iPhoneAnimationCallback callback,
++		// 	IntPtr callbackParam
++		// );
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern void SDL_iPhoneSetEventPump(SDL_bool enabled);
++
++		// /* Android */
++
++		// public const int SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;
++		// public const int SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02;
++
++		// /* IntPtr refers to a JNIEnv* */
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern IntPtr SDL_AndroidGetJNIEnv();
++
++		// /* IntPtr refers to a jobject */
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern IntPtr SDL_AndroidGetActivity();
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern SDL_bool SDL_IsAndroidTV();
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern SDL_bool SDL_IsChromebook();
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern SDL_bool SDL_IsDeXMode();
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern void SDL_AndroidBackButton();
++
++		// [DllImport(nativeLibName, EntryPoint = "SDL_AndroidGetInternalStoragePath", CallingConvention = CallingConvention.Cdecl)]
++		// private static extern IntPtr INTERNAL_SDL_AndroidGetInternalStoragePath();
++
++		// public static string SDL_AndroidGetInternalStoragePath()
++		// {
++		// 	return UTF8_ToManaged(
++		// 		INTERNAL_SDL_AndroidGetInternalStoragePath()
++		// 	);
++		// }
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern int SDL_AndroidGetExternalStorageState();
++
++		// [DllImport(nativeLibName, EntryPoint = "SDL_AndroidGetExternalStoragePath", CallingConvention = CallingConvention.Cdecl)]
++		// private static extern IntPtr INTERNAL_SDL_AndroidGetExternalStoragePath();
++
++		// public static string SDL_AndroidGetExternalStoragePath()
++		// {
++		// 	return UTF8_ToManaged(
++		// 		INTERNAL_SDL_AndroidGetExternalStoragePath()
++		// 	);
++		// }
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern int SDL_GetAndroidSDKVersion();
++
++		// /* Only available in 2.0.14 or higher. */
++		// [DllImport(nativeLibName, EntryPoint = "SDL_AndroidRequestPermission", CallingConvention = CallingConvention.Cdecl)]
++		// private static unsafe extern SDL_bool INTERNAL_SDL_AndroidRequestPermission(
++		// 	byte* permission
++		// );
++		// public static unsafe SDL_bool SDL_AndroidRequestPermission(
++		// 	string permission
++		// ) {
++		// 	byte* permissionPtr = Utf8EncodeHeap(permission);
++		// 	SDL_bool result = INTERNAL_SDL_AndroidRequestPermission(
++		// 		permissionPtr
++		// 	);
++		// 	Marshal.FreeHGlobal((IntPtr) permissionPtr);
++		// 	return result;
++		// }
++
++		// /* Only available in 2.0.16 or higher. */
++		// [DllImport(nativeLibName, EntryPoint = "SDL_AndroidShowToast", CallingConvention = CallingConvention.Cdecl)]
++		// private static unsafe extern int INTERNAL_SDL_AndroidShowToast(
++		// 	byte* message,
++		// 	int duration,
++		// 	int gravity,
++		// 	int xOffset,
++		// 	int yOffset
++		// );
++		// public static unsafe int SDL_AndroidShowToast(
++		// 	string message,
++		// 	int duration,
++		// 	int gravity,
++		// 	int xOffset,
++		// 	int yOffset
++		// ) {
++		// 	byte* messagePtr = Utf8EncodeHeap(message);
++		// 	int result = INTERNAL_SDL_AndroidShowToast(
++		// 		messagePtr,
++		// 		duration,
++		// 		gravity,
++		// 		xOffset,
++		// 		yOffset
++		// 	);
++		// 	Marshal.FreeHGlobal((IntPtr) messagePtr);
++		// 	return result;
++		// }
++
++		// /* WinRT */
++
++		// public enum SDL_WinRT_DeviceFamily
++		// {
++		// 	SDL_WINRT_DEVICEFAMILY_UNKNOWN,
++		// 	SDL_WINRT_DEVICEFAMILY_DESKTOP,
++		// 	SDL_WINRT_DEVICEFAMILY_MOBILE,
++		// 	SDL_WINRT_DEVICEFAMILY_XBOX
++		// }
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern SDL_WinRT_DeviceFamily SDL_WinRTGetDeviceFamily();
++
++		// [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
++		// public static extern SDL_bool SDL_IsTablet();
++
++		// #endregion
+ 
+ 		#region SDL_syswm.h
+ 
+diff --git a/src/Content/ContentTypeReaderManager.cs b/src/Content/ContentTypeReaderManager.cs
+index 5fcf9e1..628640b 100644
+--- a/src/Content/ContentTypeReaderManager.cs
++++ b/src/Content/ContentTypeReaderManager.cs
+@@ -196,6 +196,14 @@ namespace Microsoft.Xna.Framework.Content
+ 						readerTypeString = PrepareType(readerTypeString);
+ 
+ 						Type l_readerType = Type.GetType(readerTypeString);
++						if (l_readerType == null)
++						{
++							if (readerTypeString == "Microsoft.Xna.Framework.Content.ListReader`1[[System.Char, mscorlib]]")
++							{
++								l_readerType = typeof(ListReader<char>);
++							}
++						}
++
+ 						if (l_readerType != null)
+ 						{
+ 							ContentTypeReader typeReader;
+diff --git a/src/FNAPlatform/SDL2_FNAPlatform.cs b/src/FNAPlatform/SDL2_FNAPlatform.cs
+index 9a3e91f..c02b96e 100644
+--- a/src/FNAPlatform/SDL2_FNAPlatform.cs
++++ b/src/FNAPlatform/SDL2_FNAPlatform.cs
+@@ -1279,7 +1279,7 @@ namespace Microsoft.Xna.Framework
+ 				emscripten_set_main_loop(
+ 					RunEmscriptenMainLoop,
+ 					0,
+-					1
++					0
+ 				);
+ 			}
+ 			else
+diff --git a/src/Game.cs b/src/Game.cs
+index 14021ec..a7ac733 100644
+--- a/src/Game.cs
++++ b/src/Game.cs
+@@ -138,6 +138,14 @@ namespace Microsoft.Xna.Framework
+ 			}
+ 		}
+ 
++		public bool IsRunning
++		{
++			get
++			{
++				return RunApplication;
++			}
++		}
++
+ 		public LaunchParameters LaunchParameters
+ 		{
+ 			get;
+@@ -871,11 +879,11 @@ namespace Microsoft.Xna.Framework
+ 				FNAPlatform.RunPlatformMainLoop(this);
+ 			}
+ 
+-			while (RunApplication)
+-			{
+-				Tick();
+-			}
+-			OnExiting(this, EventArgs.Empty);
++			// while (RunApplication)
++			// {
++			// 	Tick();
++			// }
++			// OnExiting(this, EventArgs.Empty);
+ 		}
+ 
+ 		private TimeSpan AdvanceElapsedTime()
