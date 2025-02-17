@@ -10,8 +10,7 @@ build-win-x64: clean-win-x64
 		--configuration Release \
 		--os win \
 		--arch x64 \
-		--output assets/win-x64/L3ave-game/ \
-		--self-contained
+		--output assets/win-x64/L3ave-game/
 
 	cd assets/win-x64/ && zip -r ../L3ave-win-x64.zip L3ave-game/
 
@@ -23,8 +22,7 @@ build-osx-x64: clean-osx-x64
 		--configuration Release \
 		--os osx \
 		--arch x64 \
-		--output assets/osx-x64/L3ave-game/ \
-		--self-contained
+		--output assets/osx-x64/L3ave-game/
 
 	cd assets/osx-x64/L3ave-game/ \
 		&& cp libFAudio.0.dylib libFAudio.dylib \
@@ -41,8 +39,7 @@ build-linux-x64: clean-linux-x64
 		--configuration Release \
 		--os linux \
 		--arch x64 \
-		--output assets/linux-x64/L3ave-game/ \
-		--self-contained
+		--output assets/linux-x64/L3ave-game/
 
 	cd assets/linux-x64/L3ave-game/ \
 		&& cp libSDL2-2.0.so.0 libSDL2.so.0
